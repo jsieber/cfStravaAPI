@@ -14,18 +14,27 @@ component {
 
         }
 
+        public function getActivityMap(accessToken, activityID){
+           var apiRequestUrl = "https://www.strava.com/api/v3/activities/#arguments.activityID#";
+           var data = getData(apiRequestUrl, arguments.accessToken);
+           return data;
+        }
+
         public array function getActivities(accessToken){
-            var httpCall = new http();
-            httpCall.setURL("https://www.strava.com/api/v3/athlete/activities");
-            httpCall.addParam(type="URL", name="access_token", value="#arguments.accessToken#");
-            httpCall.setResolveURL(true);
-            var result = httpCall.send().getPreFix();
-            return deserializeJSON(result.filecontent);
+            var apiRequestUrl = "https://www.strava.com/api/v3/athlete/activities";
+            var data = getData(apiRequestUrl, arguments.accessToken);
+            return data;
         }
 
         public struct function getCurrentAthelete(accessToken){
+            var apiRequestUrl = "https://www.strava.com/api/v3/athlete";
+            var data = getData(apiRequestUrl, arguments.accessToken);
+            return data;
+        }
+
+        private any function getData(url, accessToken){
             var httpCall = new http();
-            httpCall.setURL("https://www.strava.com/api/v3/athlete");
+            httpCall.setURL("#arguments.url#");
             httpCall.setMethod("get");
             httpCall.addParam(type="URL", name="access_token", value="#arguments.accessToken#");
             httpCall.setResolveURL(true);
@@ -34,13 +43,9 @@ component {
         }
 
         public array function getK_QOMs_CRs(accessToken, athleteID){
-            var httpCall = new http();
-            httpCall.setURL("https://www.strava.com/api/v3/athletes/#arguments.athleteID#/koms");
-            httpCall.setMethod("get");
-            httpCall.addParam(type="URL", name="access_token", value="#arguments.accessToken#");
-            httpCall.setResolveURL(true);
-            var result = httpCall.send().getPreFix();
-            return deserializeJSON(result.filecontent);
+            var apiRequestUrl = "https://www.strava.com/api/v3/athletes/#arguments.athleteID#/koms";
+            var data = getData(apiRequestUrl, arguments.accessToken);
+            return data;
         }
 
         public struct function validateResult(code, error) {
@@ -68,7 +73,7 @@ component {
         }
 
         private function getStravaToken(code) {
-            
+
             var httpCall = new http();
             httpCall.setURL("https://www.strava.com/oauth/token");
             httpCall.setMethod("post");

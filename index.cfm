@@ -18,6 +18,7 @@
             <li><a href="examples/currentAthlete.cfm">Current Athlete</a></li>
             <li><a href="examples/activities.cfm">Current Athlete Activities</a></li>
             <li><a href="examples/k_qoms_crs.cfm">List Athlete K/QOMs/CRs</a></li>
+			<li><a href="examples/activityMap.cfm">Activity Map</li>
         </ul>
     </body>
 </html>
