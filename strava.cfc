@@ -6,12 +6,33 @@ component {
         return this;
     }
 
+        public function convertCelsiusToFahrenheit( required numeric celsiusTemp){
+            var fahrenheitTemp = arguments.celsiusTemp * 1.8000 + 32.00;
+            return round(fahrenheitTemp);
+        }
+
+        public function convertMetersPerSecondToMilesPerHour( required numeric metersPerHour){
+            var milesPerHour = arguments.metersPerHour * 2.2369362920544;
+            return decimalFormat(milesPerHour);
+        }
+
+        public function convertMetersToFeet( required numeric elevationInMeters){
+            var elevationInFeet = arguments.elevationInMeters * 3.2808399;
+            return int(elevationInFeet);
+        }
+
 		public function convertMetersToMiles( required numeric distanceInMeters){
             var distanceInMiles = arguments.distanceInMeters * 0.00062137;
             return distanceInMiles;
         }
 
+        public function convertSecondsToMinutes( required numeric timeInSeconds){
+            var minutes = arguments.timeInSeconds \ 60;
+            var seconds = timeInSeconds - minutes * 60;
+            var timeInMinutes = minutes & " m " & seconds & " s";
+            return timeInMinutes;
 
+        }
 
         /**
 		 * Takes a time in seconds argument and converts to a time string in &quot;4d 12h 30m&quot; format.
