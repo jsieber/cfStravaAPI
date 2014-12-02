@@ -20,7 +20,7 @@
 
         <cfoutput>
         	<p>
-               <a href="#authurl#" class="btn">Login</a>
+               <a href="#authurl#" class="btn"><img src="/img/ConnectWithStrava.png"/></a>
         	</p>
         </cfoutput>
     </body>
