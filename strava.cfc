@@ -110,7 +110,6 @@ component {
             httpCall.setMethod("get");
             httpCall.addParam(type="URL", name="access_token", value="#arguments.accessToken#");
             httpCall.addParam(type="URL", name="per_page", value="#arguments.perPage#");
-            httpCall.addParam(type="URL", name="per_page", value="#arguments.perPage#");
             httpCall.setResolveURL(true);
             var result = httpCall.send().getPreFix();
             var data = deserializeJSON(result.filecontent);
