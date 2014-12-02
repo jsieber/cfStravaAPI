@@ -3,6 +3,7 @@ component {
     public function init(client_id, client_secret){
         variables.client_id = arguments.client_id;
         variables.client_secret = arguments.client_secret;
+        variables.perPage = 200;
         return this;
     }
 
@@ -91,9 +92,9 @@ component {
            return data;
         }
 
-        public array function getActivities(accessToken){
+        public function getActivities(accessToken){
             var apiRequestUrl = "https://www.strava.com/api/v3/athlete/activities";
-            var data = getData(apiRequestUrl, arguments.accessToken);
+            var data = getData(apiRequestUrl, arguments.accessToken, variables.perPage);
             return data;
         }
 
@@ -103,19 +104,26 @@ component {
             return data;
         }
 
-        private any function getData(url, accessToken){
+        private any function getData(url, accessToken, perPage){
             var httpCall = new http();
             httpCall.setURL("#arguments.url#");
             httpCall.setMethod("get");
             httpCall.addParam(type="URL", name="access_token", value="#arguments.accessToken#");
+            httpCall.addParam(type="URL", name="per_page", value="#arguments.perPage#");
+            httpCall.addParam(type="URL", name="per_page", value="#arguments.perPage#");
             httpCall.setResolveURL(true);
             var result = httpCall.send().getPreFix();
-            return deserializeJSON(result.filecontent);
+            var data = deserializeJSON(result.filecontent);
+            if(isStruct(data) && structKeyExists(data, "errors") && isArray(data.errors)){
+                writeDump(var="#data.errors[1].field# #data.errors[1].code#", abort=true);
+            }else{
+                return data;
+            }
         }
 
         public array function getK_QOMs_CRs(accessToken, athleteID){
             var apiRequestUrl = "https://www.strava.com/api/v3/athletes/#arguments.athleteID#/koms";
-            var data = getData(apiRequestUrl, arguments.accessToken);
+            var data = getData(apiRequestUrl, arguments.accessToken, variables.perPage);
             return data;
         }
 
