@@ -119,6 +119,12 @@ component {
                 return data;
             }
         }
+        
+        public struct function getTotalsAndStats(accessToken, athleteID){
+            var apiRequestUrl = "https://www.strava.com/api/v3/athletes/#arguments.athleteID#/stats";
+            var data = getData(apiRequestUrl, arguments.accessToken, variables.perPage);
+            return data;
+        }
 
         public array function getK_QOMs_CRs(accessToken, athleteID){
             var apiRequestUrl = "https://www.strava.com/api/v3/athletes/#arguments.athleteID#/koms";
